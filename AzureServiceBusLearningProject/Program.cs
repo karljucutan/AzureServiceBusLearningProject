@@ -19,7 +19,7 @@ namespace AzureServiceBusLearningProject
 
             await azureServiceBus.SendMessageAsyc(orders);
 
-            await azureServiceBus.PeekMessagesAsync(10);
+            //await azureServiceBus.PeekMessagesAsync(10);
 
             Console.WriteLine("\n\n\n Received messages");
             //await azureServiceBus.ReceiveMessageAsync(10);
@@ -35,7 +35,7 @@ namespace AzureServiceBusLearningProject
         public AzureServiceBus()
         {
             _queueName = "appqueue";
-            _connectionString = "Endpoint=sb://kltjservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DDqp1P+dtiUnH0aXdYIrP5vZ/BN2SddcX+ASbJkk3QA=";
+            _connectionString = "Endpoint=sb://klthservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cv1/+uE8lkXs5qfhpCshzVwXKr1FirZUi+ASbL+BSV0=";
             _serviceBusClient = new ServiceBusClient(_connectionString);
         }
 
@@ -79,7 +79,7 @@ namespace AzureServiceBusLearningProject
                 _queueName,
                 new ServiceBusReceiverOptions 
                 {
-                    ReceiveMode = ServiceBusReceiveMode.ReceiveAndDelete
+                    ReceiveMode = ServiceBusReceiveMode.PeekLock
                 });
 
             var receivedMessages = await serviceBusReceiver.ReceiveMessagesAsync(maxMessageCount);
@@ -88,6 +88,8 @@ namespace AzureServiceBusLearningProject
             {
                 Console.WriteLine($"Message Id {message.MessageId}");
                 Console.WriteLine($"Message Body {message.Body}");
+                // Complete the message after processing
+                await serviceBusReceiver.CompleteMessageAsync(message);
             }
         }
 

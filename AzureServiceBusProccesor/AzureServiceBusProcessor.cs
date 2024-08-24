@@ -18,10 +18,14 @@ namespace AzureServiceBusProccesor
         public AzureServiceBusProcessor()
         {
             _queueName = "appqueue";
-            _connectionString = "Endpoint=sb://kltjservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DDqp1P+dtiUnH0aXdYIrP5vZ/BN2SddcX+ASbJkk3QA=";
+            _connectionString = "Endpoint=sb://klthservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cv1/+uE8lkXs5qfhpCshzVwXKr1FirZUi+ASbL+BSV0=";
             _serviceBusClient = new ServiceBusClient(_connectionString);
             _processor = _serviceBusClient.CreateProcessor(_queueName,
-                new ServiceBusProcessorOptions { AutoCompleteMessages = true });
+                new ServiceBusProcessorOptions
+                {
+                    ReceiveMode = ServiceBusReceiveMode.PeekLock,
+                    AutoCompleteMessages = false
+                });
 
             // add handler to process messages
             _processor.ProcessMessageAsync += MessageHandler;
