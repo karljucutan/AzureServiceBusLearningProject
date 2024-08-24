@@ -17,9 +17,12 @@ namespace AzureServiceBusLearningProject
                 new Order { Id = 3, CourseName = "DP-203 Azure Data Engineer", Price = 12.99m }
             };
 
-            await azureServiceBus.SendMessageAsyc(orders);
+            //await azureServiceBus.SendMessageAsyc(orders);
 
             await azureServiceBus.PeekMessagesAsync(10);
+
+            Console.WriteLine("\n\n\n Received messages");
+            await azureServiceBus.ReceiveMessageAsync(10);
         }
     }
 
@@ -68,9 +71,22 @@ namespace AzureServiceBusLearningProject
             }
         }
 
-        public async Task ReceveieMessageAsync()
+        public async Task ReceiveMessageAsync(int maxMessageCount)
         {
+            var serviceBusReceiver = _serviceBusClient.CreateReceiver(
+                _queueName,
+                new ServiceBusReceiverOptions 
+                {
+                    ReceiveMode = ServiceBusReceiveMode.ReceiveAndDelete
+                });
 
+            var receivedMessages = await serviceBusReceiver.ReceiveMessagesAsync(maxMessageCount);
+
+            foreach (var message in receivedMessages)
+            {
+                Console.WriteLine($"Message Id {message.MessageId}");
+                Console.WriteLine($"Message Body {message.Body}");
+            }
         }
 
         public async Task GetQueueLength()
