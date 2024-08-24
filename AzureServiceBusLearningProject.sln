@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServiceBusLearningProject", "AzureServiceBusLearningProject\AzureServiceBusLearningProject.csproj", "{D356451A-E915-4E5F-91F9-27474A9FFC19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServiceBusProccesor", "AzureServiceBusProccesor\AzureServiceBusProccesor.csproj", "{9C81583C-84F6-46E8-9E8A-AF31CEA9CC5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D356451A-E915-4E5F-91F9-27474A9FFC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D356451A-E915-4E5F-91F9-27474A9FFC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D356451A-E915-4E5F-91F9-27474A9FFC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C81583C-84F6-46E8-9E8A-AF31CEA9CC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C81583C-84F6-46E8-9E8A-AF31CEA9CC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C81583C-84F6-46E8-9E8A-AF31CEA9CC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C81583C-84F6-46E8-9E8A-AF31CEA9CC5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

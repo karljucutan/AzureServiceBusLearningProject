@@ -17,7 +17,7 @@ namespace AzureServiceBusLearningProject
                 new Order { Id = 3, CourseName = "DP-203 Azure Data Engineer", Price = 12.99m }
             };
 
-            //await azureServiceBus.SendMessageAsyc(orders);
+            await azureServiceBus.SendMessageAsyc(orders);
 
             await azureServiceBus.PeekMessagesAsync(10);
 
@@ -35,7 +35,7 @@ namespace AzureServiceBusLearningProject
         public AzureServiceBus()
         {
             _queueName = "appqueue";
-            _connectionString = "Endpoint=sb://klthservicebus.servicebus.windows.net/;SharedAccessKeyName=AllPolicy;SharedAccessKey=UHw5UA9B8aoh0fBCBPFAxhmGUgJMrbMOM+ASbAGlTSY=;EntityPath=appqueue";
+            _connectionString = "Endpoint=sb://kltjservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DDqp1P+dtiUnH0aXdYIrP5vZ/BN2SddcX+ASbJkk3QA=";
             _serviceBusClient = new ServiceBusClient(_connectionString);
         }
 
