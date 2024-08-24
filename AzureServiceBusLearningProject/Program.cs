@@ -22,7 +22,7 @@ namespace AzureServiceBusLearningProject
             await azureServiceBus.PeekMessagesAsync(10);
 
             Console.WriteLine("\n\n\n Received messages");
-            await azureServiceBus.ReceiveMessageAsync(10);
+            //await azureServiceBus.ReceiveMessageAsync(10);
         }
     }
 
@@ -50,6 +50,7 @@ namespace AzureServiceBusLearningProject
                 ServiceBusMessage serviceBusMessage =
                     new ServiceBusMessage(JsonSerializer.Serialize(order));
                 serviceBusMessage.ContentType = "application/json";
+                serviceBusMessage.ApplicationProperties.Add("Month", "August");
                 serviceBusMessageBatch.TryAddMessage(serviceBusMessage);
             }
 
@@ -68,6 +69,7 @@ namespace AzureServiceBusLearningProject
             {
                 Console.WriteLine($"Message Id {message.MessageId}");
                 Console.WriteLine($"Message Body {message.Body}");
+                Console.WriteLine($"Message Properties {message.ApplicationProperties["Month"]}");
             }
         }
 
