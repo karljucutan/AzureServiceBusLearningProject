@@ -18,7 +18,7 @@ namespace AzureServiceBusProccesor
         public AzureServiceBusProcessor()
         {
             _queueName = "appqueue";
-            _connectionString = "Endpoint=sb://klthservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cv1/+uE8lkXs5qfhpCshzVwXKr1FirZUi+ASbL+BSV0=";
+            _connectionString = "Endpoint=sb://kltjservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=2G9KfYhXCxg+BhcAew22nmbnJ514JjhE5+ASbOh32Ms=";
             _serviceBusClient = new ServiceBusClient(_connectionString);
             _processor = _serviceBusClient.CreateProcessor(_queueName,
                 new ServiceBusProcessorOptions

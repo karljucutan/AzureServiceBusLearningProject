@@ -35,7 +35,7 @@ namespace AzureServiceBusLearningProject
         public AzureServiceBus()
         {
             _queueName = "appqueue";
-            _connectionString = "Endpoint=sb://klthservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=cv1/+uE8lkXs5qfhpCshzVwXKr1FirZUi+ASbL+BSV0=";
+            _connectionString = "Endpoint=sb://kltjservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=2G9KfYhXCxg+BhcAew22nmbnJ514JjhE5+ASbOh32Ms=";
             _serviceBusClient = new ServiceBusClient(_connectionString);
         }
 
@@ -44,13 +44,17 @@ namespace AzureServiceBusLearningProject
             var serviceBusSender = _serviceBusClient.CreateSender(_queueName);
 
             using ServiceBusMessageBatch serviceBusMessageBatch = await serviceBusSender.CreateMessageBatchAsync();
-            
+            int id = 0;
             foreach(var order in orders)
             {
                 ServiceBusMessage serviceBusMessage =
                     new ServiceBusMessage(JsonSerializer.Serialize(order));
                 serviceBusMessage.ContentType = "application/json";
                 serviceBusMessage.ApplicationProperties.Add("Month", "August");
+
+                // set message id for duplicate detection, it wont send a message to a queue for a specific time with the same id.
+                serviceBusMessage.MessageId = id.ToString(); id ++;
+
                 serviceBusMessageBatch.TryAddMessage(serviceBusMessage);
             }
 
