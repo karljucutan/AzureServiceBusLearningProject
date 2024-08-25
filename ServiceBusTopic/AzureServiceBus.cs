@@ -45,6 +45,36 @@ namespace ServiceBusTopic
             Console.WriteLine($"Message sent");
         }
 
+        public async Task PeekMessagesAsync(int maxMessageCount)
+        {
+            var serviceBusReceiver = _serviceBusClient.CreateReceiver(_topicName, "SubscriptionA");
+
+            var peekMessages = await serviceBusReceiver.PeekMessagesAsync(maxMessageCount);
+
+            foreach (var message in peekMessages)
+            {
+                Console.WriteLine($"Message Id {message.MessageId}");
+                Console.WriteLine($"Message Body {message.Body}");
+                Console.WriteLine($"Message Properties {message.ApplicationProperties["Month"]}");
+            }
+        }
+
+        public async Task SubscriptionAReceiveMessageAsync(int maxMessageCount)
+        {
+            var serviceBusReceiver = _serviceBusClient.CreateReceiver(
+                _topicName,
+                "SubscriptionA");
+
+            var receivedMessages = await serviceBusReceiver.ReceiveMessagesAsync(maxMessageCount);
+
+            foreach (var message in receivedMessages)
+            {
+                Console.WriteLine($"Message Id {message.MessageId}");
+                Console.WriteLine($"Message Body {message.Body}");
+                // Complete the message after processing
+                await serviceBusReceiver.CompleteMessageAsync(message);
+            }
+        }
     }
 
     public class Order
