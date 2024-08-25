@@ -32,7 +32,7 @@ namespace ServiceBusTopic
                 ServiceBusMessage serviceBusMessage =
                     new ServiceBusMessage(JsonSerializer.Serialize(order));
                 serviceBusMessage.ContentType = "application/json";
-                serviceBusMessage.ApplicationProperties.Add("Month", "August");
+                serviceBusMessage.ApplicationProperties.Add("Category", order.Category);
 
                 // set message id for duplicate detection, it wont send a message to a queue for a specific time with the same id.
                 //serviceBusMessage.MessageId = id.ToString(); id++;
@@ -55,7 +55,6 @@ namespace ServiceBusTopic
             {
                 Console.WriteLine($"Message Id {message.MessageId}");
                 Console.WriteLine($"Message Body {message.Body}");
-                Console.WriteLine($"Message Properties {message.ApplicationProperties["Month"]}");
             }
         }
 
@@ -82,5 +81,7 @@ namespace ServiceBusTopic
         public int Id { get; set; }
         public string? CourseName { get; set; }
         public decimal Price { get; set; }
+
+        public string? Category { get; set; }
     }
 }
