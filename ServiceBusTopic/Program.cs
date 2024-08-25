@@ -16,3 +16,12 @@ List<Order> orders = new List<Order>
 AzureServiceBus azureServiceBus = new AzureServiceBus();
 
 await azureServiceBus.SendMessageAsyc(orders);
+
+//await azureServiceBus.PeekMessagesAsync(3);
+
+//await azureServiceBus.SubscriptionAReceiveMessageAsync(3);
+
+
+// In Azure Service Bus Dashboard.
+// Created a 1isnot0false filter and deleted sa default filter.
+// SQL filter is "1=0" resulting to SubscriptionA to not received the messages.
